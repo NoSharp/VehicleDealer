@@ -31,8 +31,10 @@ local function load_directory(dir)
     end
 end
 
-hook.Add("InitPostEntity", "DTVM_autorun", function()    
+hook.Add("InitPostEntity", "DTVM_autorun", function()
     load_directory("DTVM/utils")
+    load_directory("DTVM/config")
+    load_directory("DTVM/meta")
     load_directory("DTVM/main")
     load_directory("DTVM/net")
     load_directory("DTVM/ui")
