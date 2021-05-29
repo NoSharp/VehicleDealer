@@ -18,7 +18,7 @@ do
 
         local vehicle = ents.Create(foundVehicle.Class)
         vehicle:SetModel(foundVehicle.Model)
-        vehicle:SetPos(DTVM.Config.Delears[dealer].SpawnPosition)
+        vehicle:SetPos(DTVM.Config.Dealers[dealer].SpawnPosition)
         vehicle:Spawn()
 
         return vehicle

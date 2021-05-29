@@ -1,4 +1,4 @@
-DTVM.Config.Delears = {
+DTVM.Config.Dealers = {
     ["Some Dealer"] = {
         --- Wo der NPC spawnt
         NpcPosition = Vector( 231.377609, -2975.062500, -12735.968750),

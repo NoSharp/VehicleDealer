@@ -53,7 +53,7 @@ end
 
 function PANEL:SetDealer(dealerName)
     self.dealerName = dealerName
-    self.config = DTVM.Config.Delears[self.dealerName]
+    self.config = DTVM.Config.Dealers[self.dealerName]
 
     self.vehicleMinBound = 1
     self.vehicleMaxBound = #self.config.Vehicles

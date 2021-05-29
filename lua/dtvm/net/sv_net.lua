@@ -2,7 +2,13 @@ util.AddNetworkString("DTVM::UI::Open")
 util.AddNetworkString("DTVM::SpawnVehicle")
 util.AddNetworkString("DTVM::ParkVehicle")
 
-do 
+
+local function canUseDealer(dealer, ply)
+    local char = Character:GetCached(ply:GetNWInt("CurrentCharacterId"))
+    return dealer.RanksAllowed[char:GetRankName()] and delear.FactionsAllowed[char:GetFactionName()]
+end
+
+do
     local function doesVehicleExist(configObj, vehClass)
 
         for _,vehicle in pairs(configObj.Vehicles) do
@@ -16,12 +22,15 @@ do
     end
 
     local function isNearSpawner(ply)
-        for k,v in pairs(ents.FindInSphere(ply:GetPos(), 500)) do
-            if v:GetClass() == "dtvm_dealer" then
+        
+        for _,ent in pairs(ents.FindInSphere(ply:GetPos(), 500)) do
+            if ent:GetClass() == "dtvm_dealer" then
                 return true
             end
         end
+
         return false
+        
     end
 
     net.Receive("DTVM::SpawnVehicle", function(len,ply)
@@ -39,12 +48,14 @@ do
         local spawnedEnt = ply:GetSpawnedVehicle()
         if spawnedEnt ~= nil and IsValid(ply:GetSpawnedVehicle()) then return end
     
-        local config = DTVM.Config.Delears[dealer]
+        local config = DTVM.Config.Dealers[dealer]
         if not config then return end
+        if not canUseDealer(config, ply) then return end
         if not doesVehicleExist(config, vehClass) then return end
         local spawned = DTVM.Utils.SpawnVehicle(vehClass, ply, dealer)
         
         ply:SetSpawnedVehicle(spawned)
+
         ply.__dtvm_cooldown = CurTime() + 10
         DTVM.Utils.NotifyPlayer(ply, "Ihr Fahrzeug hat gebrannt!")
     end)
@@ -68,11 +79,12 @@ net.Receive("DTVM::ParkVehicle", function(len,ply)
 
     spawnedEnt:Remove()
     ply:RemoveSpawnedVehicle()
+
     ply.__dtvm_cooldown = CurTime() + 10
     DTVM.Utils.NotifyPlayer(ply, "Ihr Fahrzeug geparkt!")
 end)
 
-for name, dealer in pairs(DTVM.Config.Delears) do
+for name, dealer in pairs(DTVM.Config.Dealers) do
     local dealerEnt = ents.Create("dtvm_dealer")
     dealerEnt:SetPos(dealer.NpcPosition)
     dealerEnt:Spawn()
