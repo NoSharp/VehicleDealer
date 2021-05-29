@@ -26,6 +26,8 @@ do
 
     net.Receive("DTVM::SpawnVehicle", function(len,ply)
 
+        if ply.__dtvm_cooldown and ply.__dtvm_cooldown > CurTime() then return end 
+
         local vehClass = net.ReadString()
 
         local dealerNPC = ply:GetEyeTrace().Entity
@@ -43,7 +45,7 @@ do
         local spawned = DTVM.Utils.SpawnVehicle(vehClass, ply, dealer)
         
         ply:SetSpawnedVehicle(spawned)
-        
+        ply.__dtvm_cooldown = CurTime() + 10
         DTVM.Utils.NotifyPlayer(ply, "Ihr Fahrzeug hat gebrannt!")
     end)
 
@@ -51,7 +53,7 @@ end
 
 net.Receive("DTVM::ParkVehicle", function(len,ply)
     local spawnedEnt = ply:GetSpawnedVehicle()
-    
+    if ply.__dtvm_cooldown and ply.__dtvm_cooldown > CurTime() then return end 
     if spawnedEnt == nil or not IsValid(spawnedEnt) then return end
     
     local dealerNPC = ply:GetEyeTrace().Entity
@@ -66,7 +68,7 @@ net.Receive("DTVM::ParkVehicle", function(len,ply)
 
     spawnedEnt:Remove()
     ply:RemoveSpawnedVehicle()
-
+    ply.__dtvm_cooldown = CurTime() + 10
     DTVM.Utils.NotifyPlayer(ply, "Ihr Fahrzeug geparkt!")
 end)
 
