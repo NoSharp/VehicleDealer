@@ -12,3 +12,10 @@ function ENT:Initialize()
 	self:DropToFloor()
 	self:SetMaxYawSpeed(90)
 end
+
+
+function ENT:Use(ply)
+
+	net.Start("")
+
+end

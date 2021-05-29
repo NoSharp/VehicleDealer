@@ -16,8 +16,7 @@ DTVM.Config.Delears = {
         Vehicles = {
             "Airboat",
             "Jeep",
-            "Pod",
-            "Seat_Airboat"
+            "Pod"
         }
     }
 }
