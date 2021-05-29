@@ -1,5 +1,1 @@
-local PANEL = {}
-
-function PANEL:Init()
-
-end
+local function b() end

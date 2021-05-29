@@ -1,3 +1,1 @@
-net.Receive("DTVM::UI::Open", function(len,ply)
-    
-end)
+local function b() end

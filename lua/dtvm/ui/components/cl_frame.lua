@@ -23,6 +23,11 @@ function PANEL:Init()
     self.mainDock = self:Add("DPanel")
     self.mainDock.Paint = function(s,w,h) end
 
+    self.topBar = self:Add("DPanel")
+    self.topBar.Paint = function(s,w,h)
+        draw.SimpleText(s:GetParent().subHeader or "", "DTVM.Frame.SubHeader", w/2, h/2, white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+    end
+
     self.closeButton = self:Add("DTVM::Component::CloseButton")
 
     self:SetTitle("")
@@ -51,21 +56,20 @@ end
 
 function PANEL:AddBody(pnl)
     pnl:SetParent(self.mainDock)
-    pnl:SetDealer("Some Dealer")
     pnl:Dock(FILL)
 end
 
 function PANEL:PerformLayout(w,h)
 
-    -- self.topBar:Dock(TOP)
-    -- self.topBar:SetTall(h*0.15)
+    self.topBar:Dock(TOP)
+    self.topBar:SetTall(h*0.15)
 
     self.navBar:Dock(FILL)
     self.navBar:SetTall(h*0.85)
     self.navBar:SetWide(w*0.15)
     
     self.mainDock:Dock(FILL)
-    self.mainDock:SetTall(h*0.75)
+    self.mainDock:SetTall(h*0.85)
     self.mainDock:SetWide(w*0.85)
 
     self.closeButton:SetPos(w - 28,0)
