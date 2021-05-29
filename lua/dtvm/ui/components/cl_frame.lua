@@ -51,7 +51,6 @@ end
 
 function PANEL:AddBody(pnl)
     pnl:SetParent(self.mainDock)
-    pnl:SetDealer("Some Dealer")
     pnl:Dock(FILL)
 end
 
@@ -85,9 +84,5 @@ local vh = function(y)
 end
 
 concommand.Add("DTVM.Demo", function()
-    local b = vgui.Create("DTVM::Component::Frame")
-    b:SetSize(vh(75), vh(50))
-    b:Center()
-    b:SetSubHeader("Spawner")
-    b:AddBody(vgui.Create("DTVM::Component::Spawner"))
+
 end)

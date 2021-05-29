@@ -7,5 +7,5 @@ ENT.Author = "nosharp"
 ENT.Spawnable = true
 
 function ENT:SetupDataTables()
-    self:NetworkVar("String", 0, "Name")
+    self:NetworkVar("String", 0, "DealerName")
 end

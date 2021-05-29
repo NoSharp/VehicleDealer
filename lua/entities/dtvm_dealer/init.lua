@@ -16,6 +16,8 @@ end
 
 function ENT:Use(ply)
 
-	net.Start("")
+	net.Start("DTVM::UI::Open")
+		net.WriteString(self:GetDealerName())
+	net.Send(ply)
 
 end

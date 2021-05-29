@@ -13,14 +13,13 @@ function PANEL:Init()
 
     self.spawnButton = self:Add("DTVM::Component::Button")
     self.spawnButton:SetColor(Color(25,155,25))
-    self.spawnButton:SetName("Spawn")
+    self.spawnButton:SetName("Laich")
 
     function self.spawnButton.DoClick()
-        print("got here?")
         net.Start("DTVM::SpawnVehicle")
-            net.WriteString(self.dealerName)
             net.WriteString(self.curVehicle)
         net.SendToServer()
+        self:GetParent():GetParent():Close()
     end
 
     self.nextButton = self:Add("DTVM::Component::Button")
@@ -65,7 +64,6 @@ end
 
 function PANEL:AddConfigIndex(offset)
     local nextOffset = self.vehicleOffset + offset
-    print(nextOffset)
     if nextOffset > self.vehicleMaxBound then 
         self.vehicleOffset = 1
     elseif nextOffset <= 0 then 
