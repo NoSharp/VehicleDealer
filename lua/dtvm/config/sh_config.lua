@@ -1,7 +1,7 @@
 DTVM.Config.Delears = {
     ["Some Dealer"] = {
         --- Wo der NPC spawnt
-        NpcPosition = Vector(1250,0,0),
+        NpcPosition = Vector(-717.810059, 342.741577, -12223),
         --- Wo das Fahrzeug spawnt
         SpawnPosition = Vector(500,0,0),
         --- Die Ränge, die Fahrzeuge spawnen können
@@ -14,7 +14,10 @@ DTVM.Config.Delears = {
         }, 
         --- Die Fahrzeuge, die es spawnen kann
         Vehicles = {
-            "myvehicle.mdl"
+            "Airboat",
+            "Jeep",
+            "Pod",
+            "Seat_Airboat"
         }
     }
 }
